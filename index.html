@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026 | By Ayush Sharma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #1b263b, #0d1b2a, #000);
+            color: white; font-family: 'Poppins', sans-serif;
+            overflow: hidden; text-align: center;
+        }
+
+        /* Music Overlay */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+
+        .start-btn {
+            padding: 20px 40px; font-size: 1.5rem; background: #ffd700;
+            border: none; border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 0 20px #ffd700; transition: 0.3s;
+        }
+        .start-btn:hover { transform: scale(1.1); background: #fff; }
+
+        /* Main Content */
+        .container { display: none; flex-direction: column; justify-content: center; align-items: center; height: 100vh; z-index: 10; position: relative; }
+
+        .title {
+            font-size: 3rem; color: #ffd700; text-shadow: 0 0 15px #ffd700;
+            animation: shake 0.5s infinite; margin-bottom: 0;
+        }
+        @keyframes shake {
+            0% { transform: rotate(0deg); } 25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); } 100% { transform: rotate(0deg); }
+        }
+
+        .year { font-size: 6rem; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 30px #fff; }
+
+        /* Timer */
+        #timer { display: flex; gap: 10px; margin-bottom: 20px; }
+        .time-box { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; min-width: 65px; border: 1px solid #bf953f; }
+        .time-box span { display: block; font-size: 1.5rem; color: #ffcc00; font-weight: bold; }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; }
+
+        /* Wish Box */
+        .wish-container { max-width: 80%; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 15px; border-left: 5px solid #ffd700; margin-bottom: 20px; }
+        .by-line { font-size: 1.2rem; margin-bottom: 20px; }
+        .by-line b { color: #ffcc00; }
+
+        /* Balloons */
+        .balloon { position: absolute; bottom: -100px; width: 50px; height: 70px; border-radius: 50%; opacity: 0.7; animation: floatUp 6s linear infinite; }
+        @keyframes floatUp { 0% { transform: translateY(0); } 100% { transform: translateY(-120vh); } }
+
+        /* WhatsApp Input */
+        input { padding: 12px; border-radius: 25px; border: none; width: 200px; outline: none; }
+        .send-btn { padding: 12px 20px; border-radius: 25px; border: none; background: #25d366; color: white; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <h2 style="margin-bottom: 20px; color: #ffd700;">You have 1 Unread Message</h2>
+        <button class="start-btn" onclick="startExperience()">OPEN GREETING ✨</button>
+        <p style="margin-top: 15px; font-size: 0.8rem;">From: Ayush Sharma</p>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="mainContent">
+        <h1 class="title">HAPPY NEW YEAR</h1>
+        <div class="year">2026</div>
+
+        <div id="timer">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+            <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
+        </div>
+
+        <div class="wish-container">
+            <p id="wish-text">"Loading wish..."</p>
+        </div>
+
+        <p class="by-line">With Love: <b>Ayush Sharma</b></p>
+
+        <div>
+            <input type="text" id="userName" placeholder="Friend's Name">
+            <button class="send-btn" onclick="sendWish()">Share 🚀</button>
+        </div>
+    </div>
+
+    <script>
+        function startExperience() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'flex';
+            document.getElementById('bgMusic').play();
+            setInterval(createBalloon, 700);
+        }
+
+        // Random Thoughts
+        const thoughts = [
+            "May 2026 be your most successful year yet!",
+            "New Year, New Dreams, New Achievements!",
+            "May your life be as bright as the New Year fireworks!",
+            "Wishing you a year full of laughter and joy!",
+            "2026 is your year to shine. Go for it!"
+        ];
+        document.getElementById('wish-text').innerText = thoughts[Math.floor(Math.random() * thoughts.length)];
+
+        // Countdown
+        const target = new Date("Jan 1, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+
+        // Balloons
+        function createBalloon() {
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            const colors = ['#ff4d6d', '#ffb703', '#8ecae6', '#9b5de5', '#ffd700'];
+            b.style.left = (Math.random() * 100) + 'vw';
+            b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            b.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            document.body.appendChild(b);
+            setTimeout(() => b.remove(), 6000);
+        }
+
+        // WhatsApp Share
+        function sendWish() {
+            const name = document.getElementById('userName').value;
+            if(!name) return alert("Enter a name!");
+            const msg = `🎊 *Happy New Year 2026!* 🎊\n\nDear ${name}, *Ayush Sharma* sent you a special surprise! 🎶\n\nOpen it here: ` + window.location.href;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
